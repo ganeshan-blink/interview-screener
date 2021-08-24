@@ -25,29 +25,20 @@ medications = [
 
     },
     {
-       'name': 'Glimepiride',
-       'type': 'generic',
-       'class_number': 2,
-       'price': 24,
-       'currency': 'dollar',
-       'unit_type': 'tablet',
-       'max_quantity':15
-    },
-    {
        'name': 'Amaryl',
        'type': 'brand',
        'class_number': 2,
        'price': 24,
        'currency': 'dollar',
        'unit_type': 'tablet',
-       'max_quantity': 15
+       'max_quantity': 16
 
     },
     {
        'name': 'Glucotrol',
        'type': 'brand',
        'class_number': 2,
-       'price': 30,
+       'price': 40,
        'currency': 'euro',
        'unit_type': 'tablet',
        'max_quantity': 10
@@ -58,9 +49,18 @@ medications = [
        'type': 'brand',
        'class_number': 2,
        'currency': 'rouble',
-       'price_cents': 3900,
+       'price': 3900,
        'unit_type': 'tablet',
        'max_quantity': 30
+    },
+    {
+       'name': 'Glimepiride',
+       'type': 'generic',
+       'class_number': 2,
+       'price': 24,
+       'currency': 'dollar',
+       'unit_type': 'tablet',
+       'max_quantity':16
     }
 ]
 
@@ -76,9 +76,10 @@ def find_cheap_med(cnum, qty):
         if qty * get_dollar_price(med) >= lp:
             lp = qty * get_dollar_price(med)
             res = med
-    if res['max_quantity'] > qty:
+
+    if res['max_quantity'] <= qty:
         return 0
-    return get_dollar_price(res)
+    return res, get_dollar_price(res)
     
 
 def get_dollar_price(med):
@@ -87,11 +88,11 @@ def get_dollar_price(med):
     elif med['currency'] == 'euro':
         return med['price'] / 0.84 # 0.84 euro = 1 dollar
     elif med['currency'] == 'rouble':
-        return med['price'] / 73 # 73 rouble = 1 dollar
+        return med['price'] * 73 # 73 rouble = 1 dollar
     elif med['currency'] == 'pound':
         return med['price'] / 0.72 # 0.72 lb = 1 dollar
     else:
         return med['price']
     
-print(find_cheap_med(2, 15))
-
+res, price = find_cheap_med(2,15)
+print("Best med for " + str(res) + " is " + str(price))
