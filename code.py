@@ -8,7 +8,7 @@ medications = [
        'name': 'losartan',
        'type': 'generic',
        'class_number': 1,
-       'price_cents': 1400,
+       'price': 14,
        'currency': 'pound',
        'unit_type': 'tablet',
        'max_quantity': 90
@@ -18,7 +18,7 @@ medications = [
        'name': 'cozaar',
        'type': 'brand',
        'class_number': 1,
-       'price_cents': 3400,
+       'price': 34,
        'currency': 'dollar',
        'unit_type': 'tablet',
        'max_quantity': 25
@@ -28,7 +28,7 @@ medications = [
        'name': 'Glimepiride',
        'type': 'generic',
        'class_number': 2,
-       'price_cents': 2400,
+       'price': 24,
        'currency': 'dollar',
        'unit_type': 'tablet',
        'max_quantity':15
@@ -37,7 +37,7 @@ medications = [
        'name': 'Amaryl',
        'type': 'brand',
        'class_number': 2,
-       'price_cents': 2400,
+       'price': 24,
        'currency': 'dollar',
        'unit_type': 'tablet',
        'max_quantity': 15
@@ -47,7 +47,7 @@ medications = [
        'name': 'Glucotrol',
        'type': 'brand',
        'class_number': 2,
-       'price_cents': 3000,
+       'price': 30,
        'currency': 'euro',
        'unit_type': 'tablet',
        'max_quantity': 10
@@ -83,15 +83,15 @@ def find_cheap_med(cnum, qty):
 
 def get_dollar_price(med):
     if med['currency'] == 'dollar':
-        return med['price_cents']
+        return med['price']
     elif med['currency'] == 'euro':
-        return med['price_cents'] / 0.84 # 0.84 euro = 1 dollar
+        return med['price'] / 0.84 # 0.84 euro = 1 dollar
     elif med['currency'] == 'rouble':
-        return med['price_cents'] / 73 # 73 rouble = 1 dollar
+        return med['price'] / 73 # 73 rouble = 1 dollar
     elif med['currency'] == 'pound':
-        return med['price_cents'] / 0.72 # 0.72 lb = 1 dollar
+        return med['price'] / 0.72 # 0.72 lb = 1 dollar
     else:
-        return med['price_cents']
+        return med['price']
     
 print(find_cheap_med(2, 15))
 
